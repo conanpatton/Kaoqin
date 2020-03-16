@@ -11,7 +11,7 @@ class Form(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # Create widgets
-        self.setFixedSize(300, 100)  # 设置窗口固定大小
+        self.setFixedSize(250, 100)  # 设置窗口固定大小
         self.setWindowTitle("考勤小程序")
 
         self.syussyabutton = QPushButton("上班")
