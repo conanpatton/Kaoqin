@@ -2,11 +2,15 @@ import sys
 import urllib.parse
 import urllib.request
 
+from enum import Enum
 from PySide2.QtWidgets import (QApplication, QDialog, QLineEdit, QPushButton,
                                QVBoxLayout, QWidget)
 
 
 class Form(QWidget):
+    class PushType(Enum):
+        SYUSYA = 1
+        TAISYA = 2
 
     def __init__(self):
         QWidget.__init__(self)
@@ -26,8 +30,10 @@ class Form(QWidget):
         self.setLayout(layout)
 
         # Add button signal to greetings slot
-        self.syussyabutton.clicked.connect(lambda: self.Postdata(1))
-        self.taisyabutton.clicked.connect(lambda: self.Postdata(2))
+        self.syussyabutton.clicked.connect(
+            lambda: self.Postdata(self.PushType.SYUSYA))
+        self.taisyabutton.clicked.connect(
+            lambda: self.Postdata(self.PushType.TAISYA))
 
     def Postdata(self, post_type):
         request_url = 'http://10.110.168.126/cws/srwtimerec'
@@ -62,11 +68,11 @@ class Form(QWidget):
             'watch': ''
         }
 
-        if post_type == 1:
+        if post_type == self.PushType.SYUSYA:
             request_datas = urllib.parse.urlencode(syussya_request_datas)
         else:
             request_datas = urllib.parse.urlencode(taisya_request_datas)
-        # request_datas = urllib.parse.urlencode(taisya_request_datas)
+
         request_datas = request_datas.encode('ascii')
         res = urllib.request.Request(
             url=request_url, headers=request_headers, data=request_datas)
