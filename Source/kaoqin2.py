@@ -70,7 +70,7 @@ class Form(QWidget):
 
         if post_type == self.PushType.SYUSYA:
             request_datas = urllib.parse.urlencode(syussya_request_datas)
-        else:
+        elif post_type == self.PushType.TAISYA:
             request_datas = urllib.parse.urlencode(taisya_request_datas)
 
         request_datas = request_datas.encode('ascii')
