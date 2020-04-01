@@ -4,7 +4,7 @@ import urllib.request
 
 from enum import Enum
 from PySide2.QtWidgets import (QApplication, QDialog, QLineEdit, QPushButton,
-                               QVBoxLayout, QWidget)
+                               QVBoxLayout, QWidget, QLabel, QTextEdit, QLineEdit)
 
 
 class Form(QWidget):
@@ -15,14 +15,23 @@ class Form(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # Create widgets
-        self.setFixedSize(250, 100)  # 设置窗口固定大小
+        self.setFixedSize(250, 150)  # 设置窗口固定大小
         self.setWindowTitle("考勤小程序")
 
+        self.userNoLabel = QLabel("工号: ")
+        self.userNo = QLineEdit("0CB118023")
+        self.pdLabel = QLabel("密码: ")
+        self.pd = QLineEdit("Kyqiu123")
+        self.pd.setEchoMode(QLineEdit.Password)
         self.syussyabutton = QPushButton("上班")
         self.taisyabutton = QPushButton("下班")
 
         # Create layout and add widgets
         layout = QVBoxLayout()
+        layout.addWidget(self.userNoLabel)
+        layout.addWidget(self.userNo)
+        layout.addWidget(self.pdLabel)
+        layout.addWidget(self.pd)
         layout.addWidget(self.syussyabutton)
         layout.addWidget(self.taisyabutton)
 
@@ -56,15 +65,19 @@ class Form(QWidget):
 
         syussya_request_datas = {
             'dakoku': 'syussya',
-            'user_id': '0CB118023',
-            'password': 'Kyqiu123',
+            # 'user_id': '0CB118023',
+            'user_id': self.userNo.text,
+            # 'password': 'Kyqiu123',
+            'password': self.pd.text,
             'watch': ''
         }
 
         taisya_request_datas = {
             'dakoku': 'taisya',
-            'user_id': '0CB118023',
-            'password': 'Kyqiu123',
+            # 'user_id': '0CB118023',
+            'user_id': self.userNo.text,
+            # 'password': 'Kyqiu123',
+            'password': self.pd.text,
             'watch': ''
         }
 
