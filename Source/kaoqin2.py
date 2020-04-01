@@ -17,7 +17,7 @@ class Form(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # Create widgets
-        self.setFixedSize(250, 160)  # 设置窗口固定大小
+        self.setFixedSize(280, 175)  # 设置窗口固定大小
         self.setWindowTitle("考勤小程序")
 
         self.userNoLabel = QLabel("工号: ")
@@ -27,6 +27,7 @@ class Form(QWidget):
         self.pd.setEchoMode(QLineEdit.Password)
         self.syussyabutton = QPushButton("上班")
         self.taisyabutton = QPushButton("下班")
+        self.responsetxt = QLabel("打卡时间：")
 
         # Create layout and add widgets
         layout = QVBoxLayout()
@@ -36,6 +37,7 @@ class Form(QWidget):
         layout.addWidget(self.pd)
         layout.addWidget(self.syussyabutton)
         layout.addWidget(self.taisyabutton)
+        layout.addWidget(self.responsetxt)
 
         # Set dialog layout
         self.setLayout(layout)
@@ -101,8 +103,11 @@ class Form(QWidget):
             beijing_dt = gmt_dt.astimezone()
             BEIJING_FROMAT = '%a, %Y-%m-%d %H:%M:%S'
             beijing_str = beijing_dt.strftime(BEIJING_FROMAT)
-            # print(beijing_str)
-            # print(datetime(response.headers['Date']).astimezone())
+
+            if post_type == self.PushType.SYUSYA:
+                self.responsetxt.setText("上班 打卡时间：" + beijing_str)
+            elif post_type == self.PushType.TAISYA:
+                self.responsetxt.setText("下班 打卡时间：" + beijing_str)
         except urllib.error.URLError as err:
             print(err)
 
