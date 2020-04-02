@@ -1,12 +1,11 @@
 import sys
 import urllib.parse
 import urllib.request
+import pytz
 from datetime import datetime, timezone, timedelta
 from enum import Enum
-from PySide2.QtWidgets import (QApplication, QDialog, QLineEdit, QPushButton,
-                               QVBoxLayout, QWidget, QLabel, QTextEdit, QLineEdit)
-import pytz
-import json
+from PySide2.QtWidgets import (
+    QApplication, QLineEdit, QPushButton, QVBoxLayout, QWidget, QLabel)
 
 
 class Form(QWidget):
@@ -118,6 +117,7 @@ class Form(QWidget):
             return beijing_str
         except Exception as ex:
             print(ex)
+
 
 if __name__ == '__main__':
     # Create the Qt Application
