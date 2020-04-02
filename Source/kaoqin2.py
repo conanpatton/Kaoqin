@@ -109,21 +109,15 @@ class Form(QWidget):
     def GetBeijingTime(self, gmttime):
         try:
             GMT_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
-            gmt_str = response.headers['Date']
-            gmt_dt = datetime.strptime(response.headers['Date'], GMT_FORMAT)
+            gmt_dt = datetime.strptime(gmttime, GMT_FORMAT)
             gmt_dt = gmt_dt.replace(tzinfo=pytz.utc)
 
             beijing_dt = gmt_dt.astimezone()
             BEIJING_FROMAT = '%a, %Y-%m-%d %H:%M:%S'
             beijing_str = beijing_dt.strftime(BEIJING_FROMAT)
-
-            if post_type == self.PushType.SYUSYA:
-                self.syussyatime.setText("上班 打卡时间：" + beijing_str)
-            elif post_type == self.PushType.TAISYA:
-                self.taisyatime.setText("下班 打卡时间：" + beijing_str)
-        except urllib.error.URLError as err:
-            print(err)
-
+            return beijing_str
+        except Exception as e:
+            print(e)
 
 if __name__ == '__main__':
     # Create the Qt Application
