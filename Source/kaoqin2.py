@@ -97,6 +97,17 @@ class Form(QWidget):
             res = urllib.request.Request(
                 url=request_url, headers=request_headers, data=request_datas)
             response = urllib.request.urlopen(res)
+            beijing_str = self.GetBeijingTime(response.headers['Date'])
+
+            if post_type == self.PushType.SYUSYA:
+                self.syussyatime.setText('上班 打卡时间：' + beijing_str)
+            elif post_type == self.PushType.TAISYA:
+                self.taisyatime.setText('下班 打卡时间：' + beijing_str)
+        except urllib.error.URLError as err:
+            print(err)
+
+    def GetBeijingTime(self, gmttime):
+        try:
             GMT_FORMAT = '%a, %d %b %Y %H:%M:%S GMT'
             gmt_str = response.headers['Date']
             gmt_dt = datetime.strptime(response.headers['Date'], GMT_FORMAT)
