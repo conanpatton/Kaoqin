@@ -17,7 +17,7 @@ class Form(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # Create widgets
-        self.setFixedSize(300, 175)  # 设置窗口固定大小
+        self.setFixedSize(300, 200)  # 设置窗口固定大小
         self.setWindowTitle("考勤小程序")
 
         self.userNoLabel = QLabel("工号: ")
@@ -116,8 +116,8 @@ class Form(QWidget):
             BEIJING_FROMAT = '%a, %Y-%m-%d %H:%M:%S'
             beijing_str = beijing_dt.strftime(BEIJING_FROMAT)
             return beijing_str
-        except Exception as e:
-            print(e)
+        except Exception as ex:
+            print(ex)
 
 if __name__ == '__main__':
     # Create the Qt Application
