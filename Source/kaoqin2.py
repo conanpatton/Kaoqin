@@ -17,7 +17,7 @@ class Form(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # Create widgets
-        self.setFixedSize(280, 175)  # 设置窗口固定大小
+        self.setFixedSize(300, 175)  # 设置窗口固定大小
         self.setWindowTitle("考勤小程序")
 
         self.userNoLabel = QLabel("工号: ")
@@ -27,8 +27,8 @@ class Form(QWidget):
         self.pd.setEchoMode(QLineEdit.Password)
         self.syussyabutton = QPushButton("上班")
         self.taisyabutton = QPushButton("下班")
-        self.syussyatime = QLabel("上班打卡时间：")
-        self.taisyatime = QLabel("下班打卡时间：")
+        self.syussyatime = QLabel("上班 打卡时间：")
+        self.taisyatime = QLabel("下班 打卡时间：")
 
         # Create layout and add widgets
         layout = QVBoxLayout()
