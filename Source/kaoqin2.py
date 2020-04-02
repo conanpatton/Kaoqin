@@ -27,7 +27,8 @@ class Form(QWidget):
         self.pd.setEchoMode(QLineEdit.Password)
         self.syussyabutton = QPushButton("上班")
         self.taisyabutton = QPushButton("下班")
-        self.responsetxt = QLabel("打卡时间：")
+        self.syussyatime = QLabel("上班打卡时间：")
+        self.taisyatime = QLabel("下班打卡时间：")
 
         # Create layout and add widgets
         layout = QVBoxLayout()
@@ -37,7 +38,8 @@ class Form(QWidget):
         layout.addWidget(self.pd)
         layout.addWidget(self.syussyabutton)
         layout.addWidget(self.taisyabutton)
-        layout.addWidget(self.responsetxt)
+        layout.addWidget(self.syussyatime)
+        layout.addWidget(self.taisyatime)
 
         # Set dialog layout
         self.setLayout(layout)
@@ -105,9 +107,9 @@ class Form(QWidget):
             beijing_str = beijing_dt.strftime(BEIJING_FROMAT)
 
             if post_type == self.PushType.SYUSYA:
-                self.responsetxt.setText("上班 打卡时间：" + beijing_str)
+                self.syussyatime.setText("上班 打卡时间：" + beijing_str)
             elif post_type == self.PushType.TAISYA:
-                self.responsetxt.setText("下班 打卡时间：" + beijing_str)
+                self.taisyatime.setText("下班 打卡时间：" + beijing_str)
         except urllib.error.URLError as err:
             print(err)
 
